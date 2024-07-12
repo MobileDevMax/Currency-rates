@@ -1,0 +1,44 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(CurrencyRatesApp());
+
+class CurrencyRatesApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Currency rates',
+      home: CurrencyRatesScreen(),
+    );
+  }
+}
+
+class CurrencyRatesScreen extends StatelessWidget {
+  final List<Map<String, String>> currencyRates = [
+    {'currency': 'EUR', 'rate': '1.09'},
+    {'currency': 'GBP', 'rate': '1.30'},
+    {'currency': 'JPY', 'rate': '0.0063'},
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Currency rates'),
+      ),
+      body: Center(
+        child: DataTable(
+          columns: [
+            DataColumn(label: Text('Currency')),
+            DataColumn(label: Text('Rate(USD)')),
+          ],
+          rows: currencyRates.map((rate) {
+            return DataRow(cells: [
+              DataCell(Text(rate['currency']!)),
+              DataCell(Text(rate['rate']!)),
+            ]);
+          }).toList(),
+        ),
+      ),
+    );
+  }
+}
